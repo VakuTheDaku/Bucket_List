@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../widgets/sign_in_up.dart';
 
+import 'package:bucketlist/modules/http.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -10,6 +11,22 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController nameController= TextEditingController();
+  TextEditingController passController= TextEditingController();
+
+
+  createUser() async {
+
+
+    var result=await http_post("create-user", {
+      "email": nameController.text,
+      "password": passController.text
+    });
+    }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -62,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   Row(
+
                     children: [
                       Text(
                         "If you are new",
@@ -91,18 +109,35 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   SizedBox(
+
                     height: 10,
                   ),
-                  inputField('email'),
+               TextField(
+
+                controller: nameController,
+                decoration: InputDecoration(
+                    fillColor: Colors.white54,
+                    filled: true,
+                    hintText: "Email"
+                ),),
+
                   SizedBox(
                     height: 20,
                   ),
-                  inputField('Password'),
+              TextField(
+
+                controller: passController,
+                decoration: InputDecoration(
+                    fillColor: Colors.white54,
+                    filled: true,
+                    hintText: "Password"
+                ),),
                   SizedBox(
                     height: 10,
                   ),
                   TextButton(
-                    onPressed: () {},
+
+                    onPressed: (){},
                     child: Text(
                       "Forget Password",
                       style: TextStyle(
@@ -116,7 +151,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 30,
                   ),
-                  myButton("Log In")
+              Container(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: createUser,
+                  child: Text(
+                    "Log In",
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: 'Alef',
+                        fontWeight: FontWeight.bold,
+                        backgroundColor: Colors.black,
+                        color: Colors.white),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    shadowColor: Colors.black,
+                    primary: Colors.black,
+                  ),
+                ),
+              )
                 ],
               ),
             ),
