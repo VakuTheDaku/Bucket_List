@@ -15,7 +15,7 @@ Future<RequestResult> http_post(String route, [dynamic data]) async{
   var url="$PROTOCOL://$DOMAIN/$route";
 
   String body = json.encode(data);
-  print(body);
+
   var result= await http.post(
     url,
     headers: {"Content-Type": "application/json"},

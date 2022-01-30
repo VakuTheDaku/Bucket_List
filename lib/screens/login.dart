@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../widgets/sign_in_up.dart';
-
+import './createacnt.dart';
 import 'package:bucketlist/modules/http.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -34,17 +34,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        title: Text("BucketList", textDirection: TextDirection.ltr, style: TextStyle(color: Colors.white),),
+
         toolbarHeight: 80,
         elevation: 0,
-        backgroundColor: Colors.transparent,
+
+        backgroundColor: Colors.black,
       ),
       backgroundColor: Colors.blueGrey,
       body: Container(
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.fitWidth,
               image: AssetImage('images/login.jpg'),
-              scale: 0.1),
+              scale: 1),
         ),
         child: SingleChildScrollView(
           child: SafeArea(
@@ -88,24 +93,40 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontFamily: 'Alef',
                         ),
                       ),
-                      // TextButton(
-                      //   onPressed: () {
-                      //     Navigator.pushReplacement(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => CreateAccountScreen()),
-                      //     );
-                      //   },
-                      //   child: Text(
-                      //     "Create New",
-                      //     style: TextStyle(
-                      //       color: Color.fromRGBO(13, 96, 43, 1),
-                      //       fontSize: 20,
-                      //       fontFamily: 'Alef',
-                      //       fontWeight: FontWeight.bold,
-                      //     ),
-                      //   ),
-                      // )
+                      TextButton(
+
+                          style: ButtonStyle(
+
+                              // padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.all(10)),
+                              foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.black)
+                                  )
+                              )
+                          ),
+
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Registerpage()),
+                          );
+                        },
+                        child: Text(
+
+                          "Create New",
+                          style: TextStyle(
+                            color: Colors.white,
+
+                            fontSize: 20,
+                            fontFamily: 'Alef',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                   SizedBox(
