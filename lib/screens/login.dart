@@ -1,3 +1,4 @@
+import 'package:bucketlist/screens/mappage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../widgets/sign_in_up.dart';
@@ -11,17 +12,33 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController nameController= TextEditingController();
+  TextEditingController mailController= TextEditingController();
   TextEditingController passController= TextEditingController();
+  String response="";
+
+  LoginUser() async {
 
 
-  createUser() async {
-
-
-    var result=await http_post("create-user", {
-      "email": nameController.text,
+    var result=await http_post("", {
+      "email": mailController.text,
       "password": passController.text
     });
+    if(result.ok){
+      setState(() {
+        response=result.data['status'].toString();
+        if(response=="true") {
+
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+              builder: (context) => Mappage()));
+
+        }else{
+          print(result.data);
+        };
+      });
+
+    }
     }
 
 
@@ -135,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                TextField(
 
-                controller: nameController,
+                controller: mailController,
                 decoration: InputDecoration(
                     fillColor: Colors.white54,
                     filled: true,
@@ -176,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: createUser,
+                  onPressed: LoginUser,
                   child: Text(
                     "Log In",
                     style: TextStyle(

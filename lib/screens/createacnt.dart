@@ -25,7 +25,7 @@ class _RegisterpageState extends State<Registerpage> {
     print(result.data);
     if(result.ok){
       setState(() {
-        response=result.data['status'];
+        response=result.data['status'].toString();
         if(response=="Registered") {
           Navigator.pushReplacement(
             context,
