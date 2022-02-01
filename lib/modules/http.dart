@@ -7,8 +7,8 @@ class RequestResult
   dynamic data;
   RequestResult(this.ok, this.data);
 }
-const PROTOCOL = "http";
-const DOMAIN= "192.168.43.130:3000";
+const PROTOCOL = "https";
+const DOMAIN= "backend-bucket-list.herokuapp.com";
 
 
 Future<RequestResult> http_get(String route, [dynamic data]) async{
